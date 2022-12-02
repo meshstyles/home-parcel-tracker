@@ -54,3 +54,10 @@ Axios v0.27.2 by Matt Zabriskie Released under the MIT License
 Vue.js v2.6.14 by Evan You Released under the MIT License  
 Bootstrap v3.4.1 by Twitter, Inc. Released under the MIT License  
 Icons made by Glyphicons and licensed from Bootstrap. [https://www.glyphicons.com/](https://www.glyphicons.com/)
+
+# API Docs
+
+The API docs are meant to help with developing alternative frontends and use Swagger UI
+Swagger UI by Viacheslav Lotsmanov Released under the MIT License
+
+For more the Opensource Notice please consult (https://github.com/meshstyles/home-parcel-tracker/blob/api-docs/swagger-ui-es-bundle-core.js.LICENSE.txt)[https://github.com/meshstyles/home-parcel-tracker/blob/api-docs/swagger-ui-es-bundle-core.js.LICENSE.txt]
