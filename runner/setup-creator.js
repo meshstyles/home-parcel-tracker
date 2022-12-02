@@ -24,7 +24,7 @@ for (const supportedService of supportedServices) {
 
 content += `cp -r */ ../
 cd ../
-rm external`
+rm -r external`
 
 try {
     fs.writeFileSync('./setup.sh', content);
