@@ -10,3 +10,12 @@ docs/_book
 test/
 
 .sass-cache/
+
+#added safety but make sure to exclude external files from commits
+*.png
+*.jpg
+*.ttf
+*.svg
+*.eot
+*.woff
+*.woff2
