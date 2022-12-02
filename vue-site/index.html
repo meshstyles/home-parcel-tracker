@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Parcel Tracker</title>
+
+        <!-- this script sets up syle and allows for theme changes -->
+        <!-- <script src="./js/themeswitch.js"></script> -->
+
+        <!-- Vue.js -->
+        <script src="./js/vue.js"></script>
+        <!-- Axios -->
+        <script src="./js/axios.min.js"></script>
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="./css/bootstrap.min.css" />
+
+        <link rel="stylesheet" href="./css/modal.css" />
+        <link rel="stylesheet" href="./css/additions.css" />
+        
+        <link rel="icon" type="image/x-icon" href="./img/parcel-logo.png" />
+    </head>
+
+    <body>
+        <div id="app">
+            <!-- <p class="text-center title-text-4">
+            Parcel Tracking (Updated 4 times a day)
+        </p> -->
+
+            <h1 class="text-center text-bright">Parcel Tracking</h1>
+            <h3 class="text-center text-bright">(Updates 4 times a day)</h3>
+
+            <div class="container">
+                <!--Row with two equal columns-->
+                <!--rows are 12 elements wide-->
+                <!--we will ignore this to make things simple-->
+
+                <div class="row row-flex">
+                    <div
+                        v-for="parcel in parcels"
+                        :key="parcel.traceid"
+                        class="col-md-4 col-sm-6 col-xs-12"
+                    >
+                        <div
+                            class="content sligthly-rounded-corner"
+                            :class="getBg(parcel)"
+                        >
+                            <button
+                                class="btn text-center text-dark"
+                                @click="removePackageById(parcel.traceid)"
+                            >
+                                <span
+                                    class="glyphicon glyphicon-trash text-center "
+                                    aria-hidden="true"
+                                ></span>
+                            </button>
+                            <a :href="getLink(parcel)">
+                                <img
+                                    class="center-block logo"
+                                    :src="getLogo(parcel)"
+                                    alt="shipping company logo"
+                                    loading="lazy"
+                                    width="200"
+                                /><br />
+                                <p
+                                    class="text-center text-breaking text-bright"
+                                >
+                                    {{ getText(parcel.statusCode) }}
+                                </p>
+                                <p class="text-center text-breaking text-bright" >
+                                    <strong>{{ parcel.traceid }}</strong>
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- floating action button -->
+            <div id="themeSwitcher" class="floating-button" data-toggle="modal" data-target="#myModal">
+                <a href="#open-modal" class="text-center" > ➕ </a>
+            </div>
+
+            <!-- modal CSS -->
+            <!-- https://codepen.io/timothylong/pen/AJxrPR -->
+
+            <div id="open-modal" class="modal-window">
+                <div>
+                    <a href="#modal-close" title="Close" class="modal-close">
+                        <span
+                            class="glyphicon glyphicon-remove"
+                            aria-hidden="true"
+                        ></span>
+                    </a>
+                    <h2 class="text-dark title-text-3">
+                        <strong>Add a Parcel</strong>
+                    </h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="searchBar">Barcode</label>
+                            <input
+                                type="query"
+                                id="searchBar"
+                                class="form-control"
+                                placeholder="Barcode"
+                                v-model="parcelID"
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-dark" for="serviceDropdown"
+                                >Parcel Service</label
+                            >
+                            <select
+                                v-model="parcelService"
+                                class="form-control"
+                                id="serviceDropdown"
+                            >
+                                <option disabled value="">
+                                    Parcel Service
+                                </option>
+                                <option
+                                    v-for="service in services"
+                                    :value="service.name"
+                                >
+                                    {{ service.name }}
+                                </option>
+                            </select>
+                        </div>
+                        <button
+                        class="right btn btn-primary"
+                        @click="addPackage()"
+                        >
+                        Add Parcel
+                    </button>
+                    </form>
+                </div>
+            </div>
+
+
+            <p class="text-center">
+                made with vue-v2, bootstrap v3, theme by Thomas Park
+                <a href="https://bootswatch.com">bootswatch.com</a>
+            </p>
+        </div>
+        <script>
+            var app = new Vue({
+                el: "#app",
+                data: {
+                    parcels: [],
+                    parcelID: "",
+                    services: [],
+                    parcelService: "",
+                    baseurl:"http://localhost:3003",
+                    // baseurl:"/api/parcel",
+                },
+                methods: {
+                    removePackageById(removeID) {
+                        axios
+                            .get(`${this.baseurl}/remove/${removeID}`)
+                            .then((response) => {
+                                let message = response.data.message;
+                                let status = response.data.success;
+                                this.parcels = response.data.parcels;
+                                if (status !== true) {
+                                    return alert(`Error!\n${message}`);
+                                }
+                                return alert(`Success\n${message}`);
+                            });
+                        // this.getData();
+                    },
+                    addPackage() {
+                        let addID = this.parcelID.trim();
+                        if (addID === null || addID.length === 0) {
+                            this.parcelID = "";
+                            return alert("No parcel ID entered");
+                        }
+
+                        let serviceName = this.parcelService;
+                        let addPS = this.resolveService(serviceName);
+                        if (
+                            addPS === null ||
+                            addPS === "" ||
+                            addPS === undefined
+                        ) {
+                            this.parcelService = "";
+                            return alert("No parcel Service selected");
+                        }
+
+                        axios
+                            .get(`${this.baseurl}/add/${addID}/${addPS}`)
+                            .then((response) => {
+                                let message = response.data.message;
+                                let status = response.data.success;
+                                let stat = "Error!";
+                                if (status === true) stat = "Success";
+                                alert(`${stat}\n${message}`);
+                                this.parcels = response.data.parcels;
+                            });
+
+                        location.hash = 'modal-close';
+
+                        this.parcelService = "";
+                        this.parcelID = "";
+                    },
+                    resolveService(serviceName) {
+                        console.log(serviceName);
+                        let services = this.services;
+                        let code = services.find(
+                            ({ name }) => name === serviceName
+                        );
+                        console.log(code);
+                        return code.code;
+                    },
+                    getLogo(parcel) {
+                        let logo = "";
+                        let local = true;
+                        this.services.forEach((service) => {
+                            if (service.code == parcel.service) {
+                                if (local) {
+                                    logo = service.logoLocal;
+                                } else {
+                                    logo = service.logo;
+                                }
+                            }
+                        });
+                        if (
+                            logo === undefined ||
+                            logo === null ||
+                            logo === ""
+                        ) {
+                            logo = "./img/parcel-logo.png";
+                        }
+                        return logo;
+                    },
+                    getBg(parcel) {
+                        let pstat = parcel.statusCode;
+                        if (pstat === null) return "bg-warning";
+                        else if (pstat === "API ERROR") return "bg-danger";
+                        else return "bg-primary";
+                    },
+                    getText(code) {
+                        if (code === null )
+                            return 'no tracking possible';
+                        else
+                            return code;
+                    },
+                    getLink(parcel) {
+                        let baseurl = "";
+                        this.services.forEach((service) => {
+                            if (service.code == parcel.service)
+                                baseurl = service.baseurl;
+                        });
+                        return `${baseurl}${parcel.traceid}`;
+                    },
+                    getData() {
+                        console.log("running");
+                        this.searchText = false;
+                        axios
+                            .get(`${this.baseurl}/`)
+                            .then((response) => {
+                                let res = response.data;
+                                let resParcels = [];
+                                res.forEach((parcel) => {
+                                    if (parcel !== null && parcel !== undefined)
+                                        resParcels.push(parcel);
+                                });
+                                this.parcels = resParcels;
+                            });
+                        axios
+                            .get(`${this.baseurl}/services`)
+                            .then((response) => {
+                                let res = response.data;
+                                this.services = res;
+                            });
+                    },
+                },
+                created() {
+                    this.getData();
+                },
+            });
+        </script>
+    </body>
+</html>

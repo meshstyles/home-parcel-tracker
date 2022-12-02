@@ -1,0 +1,83 @@
+.floating-button {
+    position: fixed;
+    width: 3em;
+    height: 3em;
+    background: #2cb3f0;
+    border-radius: 50%;
+    bottom: 0;
+    right: 0;
+    margin: 1em;
+    color: white;
+    line-height: 3em;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.title-text-2 {
+    font-size: 2rem;
+}
+
+.title-text-3 {
+    font-size: 3rem;
+}
+
+.title-text-4 {
+    font-size: 4rem;
+}
+
+.title-text-5 {
+    font-size: 5rem;
+}
+
+p.text-center {
+    word-break: break-all;
+}
+
+.row-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* vertical spacing between columns */
+
+[class*="col-"] {
+    margin-bottom: 1em;
+}
+
+.content {
+    height: 100%;
+    padding: 2em 2em 1em;
+}
+
+.text-breaking {
+    white-space: pre-line;
+    word-break: break-all;
+}
+
+.text-bright {
+    color: #f0f8ff;
+}
+
+.text-dark {
+    color: #102027;
+}
+
+button.text-dark:hover {
+    color: #62727b;
+}
+
+.sligthly-rounded-corner {
+    border-radius: 1rem;
+}
+
+img.logo {
+    /* padding: 2em; */
+    object-fit: contain;
+    align-self: center;
+    width: 125px;
+    height: 100px;
+}
+
+.right {
+    float: right;
+}
