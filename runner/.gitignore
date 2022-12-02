@@ -132,3 +132,4 @@ dist
 
 # cache files
 parcels.json
+setup.sh
