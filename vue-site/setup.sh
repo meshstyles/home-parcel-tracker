@@ -26,4 +26,4 @@ curl 'https://preview.thenewsmarket.com/Previews/GLSG/StillAssets/960x540/519244
 curl 'https://upload.wikimedia.org/wikipedia/de/2/29/Hermes_Logistik_Gruppe_2008.svg' -o './img/hermes.svg'
 cp -r */ ../
 cd ../
-rm external
+rm -r external
