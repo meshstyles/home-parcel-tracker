@@ -1,5 +1,6 @@
 # Home Parcel Tracking
 
+![Screenshot](docs/ptrack-screenshot.png)
 This Project is made to give you an overview of your traced parcels running locally on your server.
 It uses publicly available APIs which are mostly undocumented to track the parcels.
 It then shows you in a simple Dashboard what your parcels are up to.
