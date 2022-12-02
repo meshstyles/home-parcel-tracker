@@ -1,0 +1,16 @@
+[Unit]
+Description=ParcelAPI
+After=syslog.target
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+RestartSec=1
+Type=simple
+User=USER
+ExecStart=/path/to/script
+Restart=always
+Environment=USER=USER HOME=/home/USER
+
+[Install]
+WantedBy=multi-user.target

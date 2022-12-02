@@ -1,0 +1,150 @@
+openapi: 3.0.3
+info:
+  title: Parcel Tracker
+  description: |-
+    These are the docs for the in-home parcel tracker API that uses public parcel tracking APIs and manages the parcel IDs. There is also an UI available in the same repo, but this documentation may help create CLI tools or something else.
+    
+    Please note that this API is unsecured, there is no login and there are no user accounts since it’s intended to be used in-home only. This is done to keep things very simple and friction free.
+  license:
+    name: MIT
+  version: 1.0.11
+externalDocs:
+  description: GitHub
+  url: https://github.com/meshstyles/parcel-tracker
+tags:
+  - name: parcels
+    description: all APIs regarding parcels
+  - name: services
+    description: all APIs regarding supported shipping services
+paths:
+  /:
+    get:
+      tags:
+        - parcels
+      summary: Returns a List of tracked parcels
+      description: Returns a List of all currently tracked parcels
+      operationId: getParcelsList
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/parcels'
+  /add/{traceId}/{service}/:
+    get:
+      tags:
+        - parcels
+      summary: Add a new parcel to be tracked
+      description: Returns a single pet
+      operationId: addParcels
+      parameters:
+        - name: traceId
+          in: path
+          description: the shipping ID to be traced 
+          required: true
+          schema:
+            type: string
+        - name: service
+          in: path
+          description: the code of the shipping service used
+          required: true
+          schema:
+            type: string            
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /remove/{traceId}/:
+    get:
+      tags:
+        - parcels
+      summary: Removes a parcel
+      description: Removes a parcels from the currently tracked parcels
+      operationId: removeParcel
+      parameters:
+        - name: traceId
+          in: path
+          description: the shipping ID to be traced 
+          required: true
+          schema:
+            type: string           
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /services/:
+    get:
+      tags:
+        - services
+      summary: Returns a List of supported services
+      description: Returns a List of all supported shipping services
+      operationId: getServices
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/services'
+components:
+  schemas:
+    parcel:
+      type: object
+      properties:
+        statusCode:
+          type: string
+          example: 'Delivered'
+        traceid:
+          type: string
+          example: 'CN123456789US'
+        service:
+          type: string
+          example: 'cainiao'
+        status:
+          type: string
+          example: 'The parcel has been delivered and stored at a safe place.'
+    service:
+      type: object
+      properties:
+        code:
+          type: string
+          example: 'cainiao'
+        name:
+          type: string
+          example: 'Example Cainiao'
+        baseurl:
+          type: string
+          example: 'http://example.tld/tracking?id='
+        logo:
+          type: string
+          example: 'https://example.tld/logo.svg'
+        logoLocal:
+          type: string
+          example: './img/cainiao.svg'
+    ApiResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+          example: 'successfully added'
+        parcels:
+          type: array
+          items: 
+            $ref: '#/components/schemas/parcel'
+    parcels:
+      type: array
+      items: 
+        $ref: '#/components/schemas/parcel'
+    services:
+      type: array
+      items: 
+        $ref: '#/components/schemas/service'
