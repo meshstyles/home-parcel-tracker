@@ -27,8 +27,8 @@
             Parcel Tracking (Updated 4 times a day)
         </p> -->
 
-            <h1 class="text-center text-bright">Parcel Tracking</h1>
-            <h3 class="text-center text-bright">(Updates 4 times a day)</h3>
+            <h1 class="text-center text-dark">Parcel Tracking</h1>
+            <h3 class="text-center text-dark">(Updates 4 times a day)</h3>
 
             <div class="container">
                 <!--Row with two equal columns-->
@@ -139,8 +139,8 @@
 
 
             <p class="text-center">
-                made with vue-v2, bootstrap v3, theme by Thomas Park
-                <a href="https://bootswatch.com">bootswatch.com</a>
+                made with vue-v2, bootstrap v3, Glyphicons for bootstrap
+                <a href="https://bootswatch.com">https://www.glyphicons.com/</a>
             </p>
         </div>
         <script>
@@ -152,6 +152,7 @@
                     services: [],
                     parcelService: "",
                     baseurl:"http://localhost:3003",
+                    localImages: false,
                     // baseurl:"/api/parcel",
                 },
                 methods: {
@@ -214,7 +215,7 @@
                     },
                     getLogo(parcel) {
                         let logo = "";
-                        let local = true;
+                        let local = this.localImages;
                         this.services.forEach((service) => {
                             if (service.code == parcel.service) {
                                 if (local) {
