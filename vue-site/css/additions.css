@@ -62,6 +62,10 @@ p.text-center {
     color: #102027;
 }
 
+.text-dark:link {
+    color: #102027;
+}
+
 button.text-dark:hover {
     color: #62727b;
 }
