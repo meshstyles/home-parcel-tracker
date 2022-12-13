@@ -4,7 +4,7 @@ const { moduleInfo } = require('./baseclasses/moduleInfo');
 const moduleMetadata = new moduleInfo(
     'test',
     'Test service',
-    'http://192.168.178.102/',
+    '#',
     'https://avatars.githubusercontent.com/u/29343041?v=4',
     './img/parcel-logo.png'
 );
