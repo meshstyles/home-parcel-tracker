@@ -1,7 +1,7 @@
 # Home Parcel Tracking
 
 ![Screenshot](docs/ptrack-screenshot.png)
-This Project is made to give you an overview of your traced parcels running locally on your server.
+This Project is made to give you a dashboard to trace your parcels running locally on your server.
 It uses publicly available APIs which are mostly undocumented to track the parcels.
 It then shows you in a simple Dashboard what your parcels are up to.
 Please read the steps below carefully.
@@ -38,10 +38,11 @@ Also check out the modules tracking modules docs [runner/tracking/docs.md](runne
 This is the frontend to the application.
 It should be webserver agnostic and, but you need to prepare some things to use it.
 I recommend copying or moving the folder to a subdirectory of your webserver.
-To set things up you need a `setup.sh`.
-An up to date `setup.sh` should be included in the folder.
-The setup downloads all the required image resources and opensource scripts and css for you.  
-Make sure to adjust the API URL in the Vue app in the `index.html` to where you're running the backend.
+All required files for an always connected setup are now included in the git.
+Make sure to adjust the API BaseURL in the Vue app in the `index.html` so the page can call the API.
+Here you can also adjust whether you pull parcel service logos locally or not.
+By default, the page will pull these images from the parcel services webservers, but you can pull them with the `download.sh` for a "fully local" setup.
+`download.sh` is in the `img` folder and should work on most nix/mac os systems.
 
 Please do not push these external dependencies back into the project if you contribute.
 One way to avoid this could be copying the frontend outside the project for development.
