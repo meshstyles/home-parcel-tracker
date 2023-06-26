@@ -26,7 +26,7 @@ app.use(cors())
 /**
  * returns list of all parcels with tracking data
  */
-app.get('/', async (req, res) => {
+app.get('/parcels', async (req, res) => {
     return res.send(JSON.stringify(parcels));
 });
 
@@ -79,6 +79,8 @@ app.get('/remove/:traceId', (req, res) => {
     return res.send(JSON.stringify({ success: success, message: message, parcels: parcels }));
 
 });
+
+app.use('/', express.static('webpage'))
 
 app.listen(port, () => {
     console.log(`[startup] Parcel Tracer API listening on port ${port}`)

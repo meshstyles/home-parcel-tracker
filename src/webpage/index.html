@@ -151,9 +151,8 @@
                     parcelID: "",
                     services: [],
                     parcelService: "",
-                    baseurl:"http://localhost:3003",
+                    baseurl:"",
                     localImages: false,
-                    // baseurl:"/api/parcel",
                 },
                 methods: {
                     removePackageById(removeID) {
@@ -258,7 +257,7 @@
                         console.log("running");
                         this.searchText = false;
                         axios
-                            .get(`${this.baseurl}/`)
+                            .get(`${this.baseurl}/parcels`)
                             .then((response) => {
                                 let res = response.data;
                                 let resParcels = [];
