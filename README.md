@@ -34,20 +34,6 @@ If you intend to contribute, please build your own up to date setup script for t
 Please replace the old before opening a pull request.
 Also check out the modules tracking modules docs [runner/tracking/docs.md](runner/tracking/docs.md)
 
-# Vue site
-
-This is the frontend to the application.
-It should be webserver agnostic and, but you need to prepare some things to use it.
-I recommend copying or moving the folder to a subdirectory of your webserver.
-All required files for an always connected setup are now included in the git.
-Make sure to adjust the API BaseURL in the Vue app in the `index.html` so the page can call the API.
-Here you can also adjust whether you pull parcel service logos locally or not.
-By default, the page will pull these images from the parcel services webservers, but you can pull them with the `download.sh` for a "fully local" setup.
-`download.sh` is in the `img` folder and should work on most nix/mac os systems.
-
-Please do not push these external dependencies back into the project if you contribute.
-One way to avoid this could be copying the frontend outside the project for development.
-
 ## Opensource notice
 
 This project uses several opensource projects.
