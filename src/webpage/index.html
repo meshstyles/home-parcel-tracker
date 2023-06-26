@@ -48,12 +48,7 @@
                             <button
                                 class="btn text-center text-dark"
                                 @click="removePackageById(parcel.traceid)"
-                            >
-                                <span
-                                    class="glyphicon glyphicon-trash text-center "
-                                    aria-hidden="true"
-                                ></span>
-                            </button>
+                            >❌</button>
                             <a :href="getLink(parcel)">
                                 <img
                                     class="center-block logo"
@@ -139,8 +134,7 @@
 
 
             <p class="text-center">
-                made with vue-v2, bootstrap v3, Glyphicons for bootstrap
-                <a href="https://bootswatch.com">https://www.glyphicons.com/</a>
+                made with vue-v2, bootstrap v3
             </p>
         </div>
         <script>
