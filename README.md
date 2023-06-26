@@ -18,9 +18,10 @@ Requires `node 12+`
 ### Installation
 
 Clone the repository.  
-Get to the `runner` folder.  
-Run `npm i`.
+Get to the `src` folder.  
+Run `npm run setup`.
 Start the project runing `npm run start`.
+The server is now running on `http://localhost:3003/
 
 ### Deamonize
 

@@ -6,7 +6,8 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node index",
-        "creator": "node setup-creator"
+        "creator": "node setup-creator",
+        "setup": "npm i && node setup"
     },
     "keywords": [
         "parcel",

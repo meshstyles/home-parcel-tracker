@@ -6,7 +6,7 @@ const moduleMetadata = new moduleInfo(
     'hermesde',
     'Hermes DE',
     'https://www.myhermes.de/empfangen/sendungsverfolgung/sendungsinformation#',
-    'https://upload.wikimedia.org/wikipedia/de/2/29/Hermes_Logistik_Gruppe_2008.svg',
+    'https://newsroom.hermesworld.com/wp-content/themes/hermes/images/hermes-logo.svg',
     './img/hermes.svg'
 );
 

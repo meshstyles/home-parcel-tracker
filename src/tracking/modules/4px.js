@@ -6,7 +6,7 @@ const moduleMetadata = new moduleInfo(
     '4px',
     '4PX',
     'http://track.4px.com/#/result/0/',
-    'http://track.4px.com/assets/6be239f7fd9170ef486bd2498117d3e8.png',
+    'https://track.4px.com/assets/6be239f7fd9170ef486bd2498117d3e8.png',
     './img/4px.png'
 );
 
